@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Pogoda{% endblock title %}
+{% block content %}
+
+<section class="jumbotron bg-dark text-white">
+    <div class="container-md">
+      <h2 class="jumbotron-heading text-center">Pogoda</h2>
+      <p class="lead text-muted text-center">Sprawdź jaka jest pogoda w danym mieście</p>
+        <form method="POST">
+          <div>
+            <div>
+                {% csrf_token %}
+                {{ form.name }}
+            </div>
+            <div style="text-align: center;" class="control">
+                <button style="margin-top: 20px; margin-bottom: 20px;" type="submit" class="btn btn-primary">
+                    Dodaj Miasto
+                </button>
+            </div>
+          </div>
+        </form>
+        {% if message %}
+           <h3 class="aler alert-danger" role="alert">{{ message }}</h3>
+        {% endif %}
+    </div>
+</section>
+
+{% for weather_city in weather_data %}
+<section class="alert alert-primary">
+        <div class="container-sm">
+            <div class="columns">
+                <div class="column">
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ weather_city.ikonka }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div>
+                                        <span class="title">
+                                            <h3>
+                                                {{ weather_city.city }}
+                                            </h3>
+                                        </span>
+                                    <span class="font-weight-bold">Dzisiejsza Temperatura - w tej chwili : </span>
+                                            <span>{{ weather_city.temperature }}° C</span>
+                                            </br>
+                                    <span class="font-weight-bold">Opis pogody:</span>
+                                            <span>{{ weather_city.description }}</span>
+                                            </br>
+                                        <span class="font-weight-bold">Dzisiejsza Temperatura-Odczuwalna:  </span>
+                                            <span>{{ weather_city.temperatura_odczuwalna }}° C</span>
+                                            </br>
+                                    <span class="font-weight-bold">Temperatura Minimalna: </span>
+                                            <span>{{ weather_city.temperatura_minimalna }}° C</span>
+                                            </br>
+                                    <span class="font-weight-bold">Maksymalna Temperatura:</span>
+                                            <span>{{ weather_city.temperatura_maksymalna }}° C</span>
+                                            </br>
+                                    <span class="font-weight-bold">Cisnienie:</span>
+                                            <span>{{ weather_city.cisnienie }} hPa</span>
+                                            </br>
+                                    <span class="font-weight-bold">Wilgotnosc:</span>
+                                            <span>{{ weather_city.wilgotnosc }} %</span>
+                                            </br>
+                                    <span class="font-weight-bold">Wiatr:</span>
+                                            <span>{{ weather_city.wiatr }} km/h</span>
+                                            </br>
+                                    <span class="font-weight-bold">Wschód Słońca:</span>
+                                            <span>{{ weather_city.wschod }}</span>
+                                            </br>
+                                    <span class="font-weight-bold">Zachód Słońca:</span>
+                                            <span>{{ weather_city.zachod }}</span>
+                                            </br>
+
+                                </div>
+                            </div>
+                        </article>
+                        <div class="media-right"></div>
+                            <a href="{% url 'delete_city' weather_city.city %}">
+                                <button type="button" class="btn btn-danger">Usuń</button>
+                            </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+</br>
+{% endfor %}
+</body>
+{% endblock content %}
+</html>

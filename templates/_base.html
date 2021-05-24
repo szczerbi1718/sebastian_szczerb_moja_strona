@@ -1,0 +1,56 @@
+{% load static %}
+<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Moja Strona{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Latest compiled Javascript -->
+    <script scr="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Fixed navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'home' %}">Moja Strona</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+         {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'ksiazkiviews' %}">Ksiązki- Wyszukiwarka </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'weather' %}">Pogoda </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'youtubesearch' %}">YouTube- Wyszukiwarka </a>
+              </li>
+        </ul>
+         <a class="btn btn-primary" href="{% url 'logout' %}">Wyloguj się </a>
+         {% else %}
+            <a id="button1" class="btn btn-primary" href="{% url 'login' %}">Zaloguj sie</a>
+            <a id="button2" class="btn btn-warning" href="{% url 'signup' %}">Zarejestruj sie</a>
+         {% endif %}
+      </div>
+      <!-- Google Search -->
+          <form id="google" class="form-inline" action="http://www.google.com/search" method="get" target="_blank">
+            <input class="form-control" type="text" name="q" placeholder="Wyszukiwarka Google" autocomplete="off"/>
+            <input class="btn btn-primary" type="submit" value="Wyszukaj"/>
+          </form>
+</nav>
+<div class="container">
+    {% block content %}
+    {% endblock content %}
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+</head>
+<body>
+{% block title %}Strona głowna{% endblock title %}
+
+{% block content %}
+<h1>Witaj na mojej stronie</h1>
+{% if user.is_authenticated %}
+    <h3>Cześć {{ user.username }}!</h3>
+    <a class="btn btn-dark" href="{% url 'logout' %}">Wyloguj sie</a>
+{% else %}
+    <h4>Nie jestes zalogowany</h4>
+    <p>Zaloguj się na swoje konto aby w pełni korzystać z mojej strony.
+        <br> Jeśli jeszcze nie masz konta - Zarejestruj się
+    </p>
+    <a class="btn btn-dark" href="{% url 'login' %}">Zaloguj sie</a>
+    <a class="btn btn-dark" href="{% url 'signup' %}">Zarejestruj sie</a>
+{% endif %}
+
+{% endblock content %}
+
+</body>
+</html>

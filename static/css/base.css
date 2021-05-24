@@ -1,0 +1,43 @@
+body {
+  background: url('../images/photo.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+
+h1 {
+    color: red;
+}
+
+.form-control {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#button1 {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#button2 {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#google {
+    margin: 0 auto;
+    float: none;
+}
+
+.container {
+    margin-top: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.col-md-5 offset-md-5 {
+    margin-top : 100px;
+}
+
